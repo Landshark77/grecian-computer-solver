@@ -41,7 +41,9 @@ for FourthWheelRotations in range(12):
 		for SecondWheelRotations in range(12):
 			for FirstWheelRotations in range(12):
 				#Store all values in our SumArray before testing against the Solution array
+				#positions will loop through all 12 columns of digits
 				for positions in range(12):
+					#First Digit
 					if FirstWheel[0][positions] != 0:
 						SumArray[positions] = FirstWheel[0][positions] + SumArray[positions]
 					elif SecondWheel[1][positions] != 0:
@@ -53,6 +55,7 @@ for FourthWheelRotations in range(12):
 					elif FifthWheel[3][positions] != 0:
 						SumArray[positions] = FifthWheel[3][positions] + SumArray[positions]
 
+					#Second Digit
 					if SecondWheel[0][positions] != 0:
 						SumArray[positions] = SecondWheel[0][positions] + SumArray[positions]
 					elif ThirdWheel[1][positions] != 0:
@@ -62,6 +65,7 @@ for FourthWheelRotations in range(12):
 					elif FifthWheel[2][positions] != 0:
 						SumArray[positions] = FifthWheel[2][positions] + SumArray[positions]
 
+					#Third Digit
 					if ThirdWheel[0][positions] != 0:
 						SumArray[positions] = ThirdWheel[0][positions] + SumArray[positions] 
 					elif FourthWheel[1][positions] != 0:
@@ -69,17 +73,27 @@ for FourthWheelRotations in range(12):
 					elif FifthWheel[1][positions] != 0:
 						SumArray[positions] = FifthWheel[1][positions] + SumArray[positions]
 
+					#Fourth Digit
 					if FourthWheel[0][positions] != 0:
 						SumArray[positions] = FourthWheel[0][positions] + SumArray[positions] 
 					elif FifthWheel[0][positions] != 0:
 						SumArray[positions] = FifthWheel[0][positions] + SumArray[positions] 
 
+					#All four digits above must add up to the solution of 42	
+					#Test if a solution has been found
 					if (SumArray==Solution).all():
-						print(f'{FirstWheel}')
-						print(f'{SecondWheel}')
-						print(f'{ThirdWheel}')
-						print(f'{FourthWheel}')
-						print(f'{FifthWheel}')
+						print('Solution Found  -- Zeros represent spaces/notches on wheels')
+						print('                -- Line up each wheel so columns match the order below.\n')
+						print('First Wheel:')
+						print('\n'.join('{}: {}'.format(*k) for k in enumerate(FirstWheel)))
+						print('\nSecond Wheel:')
+						print('\n'.join('{}: {}'.format(*k) for k in enumerate(SecondWheel)))
+						print('\nThird Wheel:')
+						print('\n'.join('{}: {}'.format(*k) for k in enumerate(ThirdWheel)))
+						print('\nFourth Wheel:')
+						print('\n'.join('{}: {}'.format(*k) for k in enumerate(FourthWheel)))
+						print('\nFifth Wheel:')
+						print('\n'.join('{}: {}'.format(*k) for k in enumerate(FifthWheel)))
 				
 				#Solution Not found so reset our SumArray and rotate wheels one turn
 				SumArray = np.zeros(12)
