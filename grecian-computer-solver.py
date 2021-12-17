@@ -5,9 +5,9 @@ import numpy as np
 
 #Set static values and convert them to numpy arrays
 FifthWheel =  np.array([[12,  2,  5, 10,  7, 16,  8,  7,  8,  8,  3,  4],
-			[ 6,  3,  3, 14, 14, 21, 21,  9,  9,  4,  4,  6],
-			[ 7,  8,  9, 10, 11, 12, 13, 14, 15,  4,  5,  6],
-			[11, 14, 11, 14, 14, 11, 14, 11, 14, 11, 11, 14]])
+						[ 6,  3,  3, 14, 14, 21, 21,  9,  9,  4,  4,  6],
+						[ 7,  8,  9, 10, 11, 12, 13, 14, 15,  4,  5,  6],
+						[11, 14, 11, 14, 14, 11, 14, 11, 14, 11, 11, 14]])
 
 FourthWheel = np.array([[12,  0,  6,  0, 10,  0, 10,  0,  1,  0,  9,  0],
                         [ 2 ,13,  9,  0, 17, 19,  3, 12,  3, 26,  6,  0],
@@ -46,7 +46,6 @@ for FourthWheelRotations in range(12):
 				for positions in range(12):
 					#Next block of code tests for zeros.  Zeros represent spaces / notches on the wheel
 					#If zero is found, we move to the next wheel
-					#First Digit
 					if FirstWheel[0][positions] != 0:
 						SumArray[positions] = FirstWheel[0][positions] + SumArray[positions]
 					elif SecondWheel[1][positions] != 0:
@@ -82,21 +81,21 @@ for FourthWheelRotations in range(12):
 					elif FifthWheel[0][positions] != 0:
 						SumArray[positions] = FifthWheel[0][positions] + SumArray[positions] 
 
-					#All four digits above must add up to the solution of 42	
-					#Test if a solution has been found
-					if (SumArray==Solution).all():
-						print('Solution Found  -- Zeros represent spaces/notches on wheels')
-						print('                -- Line up each wheel so columns match the order below.\n')
-						print('First Wheel:')
-						print('\n'.join('{}: {}'.format(*k) for k in enumerate(FirstWheel)))
-						print('\nSecond Wheel:')
-						print('\n'.join('{}: {}'.format(*k) for k in enumerate(SecondWheel)))
-						print('\nThird Wheel:')
-						print('\n'.join('{}: {}'.format(*k) for k in enumerate(ThirdWheel)))
-						print('\nFourth Wheel:')
-						print('\n'.join('{}: {}'.format(*k) for k in enumerate(FourthWheel)))
-						print('\nFifth Wheel:')
-						print('\n'.join('{}: {}'.format(*k) for k in enumerate(FifthWheel)))
+				#All four digits above must add up to the solution of 42	
+				#Test if a solution has been found
+				if (SumArray==Solution).all():
+					print('Solution Found  -- Zeros represent spaces/notches on wheels')
+					print('                -- Line up each wheel so columns match the order below.\n')
+					print('First Wheel:')
+					print('\n'.join('{}: {}'.format(*k) for k in enumerate(FirstWheel)))
+					print('\nSecond Wheel:')
+					print('\n'.join('{}: {}'.format(*k) for k in enumerate(SecondWheel)))
+					print('\nThird Wheel:')
+					print('\n'.join('{}: {}'.format(*k) for k in enumerate(ThirdWheel)))
+					print('\nFourth Wheel:')
+					print('\n'.join('{}: {}'.format(*k) for k in enumerate(FourthWheel)))
+					print('\nFifth Wheel:')
+					print('\n'.join('{}: {}'.format(*k) for k in enumerate(FifthWheel)))
 				
 				#Solution Not found so reset our SumArray and rotate wheels one turn
 				SumArray = np.zeros(12)
