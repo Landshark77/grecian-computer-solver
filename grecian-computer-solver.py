@@ -41,8 +41,11 @@ for FourthWheelRotations in range(12):
 		for SecondWheelRotations in range(12):
 			for FirstWheelRotations in range(12):
 				#Store all values in our SumArray before testing against the Solution array
-				#positions will loop through all 12 columns of digits
+				#positions will loop through all 12 columns of digits, storing each columns value in the SumArray
+				#once all columns are equal to 42, then we know a solution has been found
 				for positions in range(12):
+					#Next block of code tests for zeros.  Zeros represent spaces / notches on the wheel
+					#If zero is found, we move to the next wheel
 					#First Digit
 					if FirstWheel[0][positions] != 0:
 						SumArray[positions] = FirstWheel[0][positions] + SumArray[positions]
