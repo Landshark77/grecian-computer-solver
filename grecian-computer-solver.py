@@ -4,6 +4,9 @@
 import numpy as np
 
 #Set static values and convert them to numpy arrays
+#These values should represent the values on each of the wheels
+#FirstWheel is the smallest wheel / FiftWheel is the largest wheel
+#Zeros represent spaces on each wheel
 FifthWheel =  np.array([[12,  2,  5, 10,  7, 16,  8,  7,  8,  8,  3,  4],
 			[ 6,  3,  3, 14, 14, 21, 21,  9,  9,  4,  4,  6],
 			[ 7,  8,  9, 10, 11, 12, 13, 14, 15,  4,  5,  6],
