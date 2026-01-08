@@ -3,6 +3,9 @@
 
 import numpy as np
 import sys
+import time
+
+start_time = time.perf_counter()
 
 #Set static values and convert them to numpy arrays
 #These values should represent the values on each of the wheels
@@ -145,6 +148,12 @@ for FourthWheelRotations in range(12):
 
 					print('\nOrder of numbers around each Gear starting with largest set of gears:')
 					print('\n'.join('{}: {}'.format(*k) for k in enumerate(ColumnOrder)))
+
+					print("")
+					end_time = time.perf_counter()
+					elapsed_time = end_time - start_time
+					print(f"Solution Found in:  {elapsed_time:.4f} seconds")
+
 					sys.exit(0)
 				
 				#Solution Not found so reset our SumArray and rotate wheels one turn
