@@ -1,16 +1,17 @@
 #Grecian Computer Solver
-#https://www.projectgeniusinc.com/grecian-computer-solution
+#https://projectgeniusinc.com/products/grecian-computer?variant=44024220647620
 
 import numpy as np
+import sys
 
 #Set static values and convert them to numpy arrays
 #These values should represent the values on each of the wheels
 #FirstWheel is the smallest wheel / FiftWheel is the largest wheel
 #Zeros represent spaces on each wheel
 FifthWheel =  np.array([[12,  2,  5, 10,  7, 16,  8,  7,  8,  8,  3,  4],
-			[ 6,  3,  3, 14, 14, 21, 21,  9,  9,  4,  4,  6],
-			[ 7,  8,  9, 10, 11, 12, 13, 14, 15,  4,  5,  6],
-			[11, 14, 11, 14, 14, 11, 14, 11, 14, 11, 11, 14]])
+			            [ 6,  3,  3, 14, 14, 21, 21,  9,  9,  4,  4,  6],
+			            [ 7,  8,  9, 10, 11, 12, 13, 14, 15,  4,  5,  6],
+			            [11, 14, 11, 14, 14, 11, 14, 11, 14, 11, 11, 14]])
 
 FourthWheel = np.array([[12,  0,  6,  0, 10,  0, 10,  0,  1,  0,  9,  0],
                         [ 2 ,13,  9,  0, 17, 19,  3, 12,  3, 26,  6,  0],
@@ -28,6 +29,9 @@ FirstWheel =    np.array([ 7,  0, 15,  0,  8,  0,  3,  0,  6,  0, 10,  0], ndmin
 
 #array used for holding totals of each column of digits
 SumArray = np.zeros(12)
+
+#array used to hold the order of the biggest wheel
+ColumnOrder = np.array([[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0]])
 
 #base array used to test against for solution
 Solution =    np.array([42,42,42,42,42,42,42,42,42,42,42,42], ndmin=2)
@@ -87,18 +91,61 @@ for FourthWheelRotations in range(12):
 				#All four digits above must add up to the solution of 42	
 				#Test if a solution has been found
 				if (SumArray==Solution).all():
-					print('Solution Found  -- Zeros represent spaces/notches on wheels')
-					print('                -- Line up each wheel so columns match the order below.\n')
-					print('First Wheel:')
+					print('Solution Found  -- Zeros represent spaces/notches on gears')
+					print('                -- Line up each gear so columns match the order below.\n')
+					print('First Gear:')
 					print('\n'.join('{}: {}'.format(*k) for k in enumerate(FirstWheel)))
-					print('\nSecond Wheel:')
+					print('\nSecond Gear:')
 					print('\n'.join('{}: {}'.format(*k) for k in enumerate(SecondWheel)))
-					print('\nThird Wheel:')
+					print('\nThird Gear:')
 					print('\n'.join('{}: {}'.format(*k) for k in enumerate(ThirdWheel)))
-					print('\nFourth Wheel:')
+					print('\nFourth Gear:')
 					print('\n'.join('{}: {}'.format(*k) for k in enumerate(FourthWheel)))
-					print('\nFifth Wheel:')
+					print('\nFifth Gear:')
 					print('\n'.join('{}: {}'.format(*k) for k in enumerate(FifthWheel)))
+
+					#show final numbers in order around each wheel
+					for element in range(12):
+						#First Column Order
+						if FourthWheel[0][element] != 0:
+							ColumnOrder[0][element] = FourthWheel[0][element]
+						else:
+							ColumnOrder[0][element] = FifthWheel[0][element]
+						
+						#Second Column Order
+						if ThirdWheel[0][element] != 0:
+							ColumnOrder[1][element] = ThirdWheel[0][element]
+						elif FourthWheel[1][element] != 0:
+							ColumnOrder[1][element] = FourthWheel[1][element]
+						else:
+							ColumnOrder[1][element] = FifthWheel[1][element]
+
+						#Third Column Order
+						if SecondWheel[0][element] != 0:
+							ColumnOrder[2][element]  = SecondWheel[0][element]
+						elif ThirdWheel[1][element] != 0:
+							ColumnOrder[2][element]  = ThirdWheel[1][element]
+						elif FourthWheel[2][element] != 0:
+							ColumnOrder[2][element]  = FourthWheel[2][element]
+						else:
+							ColumnOrder[2][element]  = FifthWheel[2][element]
+
+						#Fourth Column Order
+						if FirstWheel[0][element] != 0:
+							ColumnOrder[3][element]  = FirstWheel[0][element]
+						elif SecondWheel[1][element] != 0:
+							ColumnOrder[3][element]  = SecondWheel[1][element]
+						elif ThirdWheel[2][element] != 0:
+							ColumnOrder[3][element]  = ThirdWheel[2][element]
+						elif FourthWheel[3][element] != 0:
+							ColumnOrder[3][element]  = FourthWheel[3][element]
+						else:
+							ColumnOrder[3][element]  = FifthWheel[3][element]
+
+
+					print('\nOrder of numbers around each Gear starting with largest set of gears:')
+					print('\n'.join('{}: {}'.format(*k) for k in enumerate(ColumnOrder)))
+					sys.exit(0)
 				
 				#Solution Not found so reset our SumArray and rotate wheels one turn
 				SumArray = np.zeros(12)
